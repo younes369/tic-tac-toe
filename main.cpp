@@ -23,7 +23,6 @@ void gamePlay()
 
     do
     {
-        int player = 1, i, choice;
         board();
         player = (player % 2) ? 1 : 2;
 
