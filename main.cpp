@@ -9,8 +9,9 @@ char square[10] = {'o', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 int checkwin();
 void board();
-void gamePlay();
+void multiPlayer();
 void AI();
+void GamePlay(char mark, int player, int choice);
 
 int main()
 {
@@ -21,7 +22,7 @@ int main()
     cin >> mode;
     if (mode == 2)
     {
-        gamePlay();
+        multiPlayer();
     }
     else if (mode == 1)
     {
@@ -46,7 +47,6 @@ void AI()
     do
     {
         board();
-
         if ((player % 2) == 1)
         {
             cout << "Player please enter a number:  ";
@@ -68,44 +68,11 @@ void AI()
             choice = vect[randomNum];
             vect.erase(vect.begin() + (randomNum));
         }
+        GamePlay(mark, player, choice);
 
-        if (choice == 1 && square[1] == '1')
-
-            square[1] = mark;
-        else if (choice == 2 && square[2] == '2')
-
-            square[2] = mark;
-        else if (choice == 3 && square[3] == '3')
-
-            square[3] = mark;
-        else if (choice == 4 && square[4] == '4')
-
-            square[4] = mark;
-        else if (choice == 5 && square[5] == '5')
-
-            square[5] = mark;
-        else if (choice == 6 && square[6] == '6')
-
-            square[6] = mark;
-        else if (choice == 7 && square[7] == '7')
-
-            square[7] = mark;
-        else if (choice == 8 && square[8] == '8')
-
-            square[8] = mark;
-        else if (choice == 9 && square[9] == '9')
-
-            square[9] = mark;
-        else
-        {
-            cout << "Invalid move ";
-
-            player--;
-            cin.ignore();
-            cin.get();
-        }
         i = checkwin();
         player++;
+
     } while (i == -1);
 
     board();
@@ -127,7 +94,7 @@ void AI()
     cin.get();
 }
 
-void gamePlay()
+void multiPlayer()
 {
 
     int player = 1, i, choice;
@@ -144,41 +111,8 @@ void gamePlay()
 
         mark = (player == 1) ? 'X' : 'O';
 
-        if (choice == 1 && square[1] == '1')
+        GamePlay(mark, player, choice);
 
-            square[1] = mark;
-        else if (choice == 2 && square[2] == '2')
-
-            square[2] = mark;
-        else if (choice == 3 && square[3] == '3')
-
-            square[3] = mark;
-        else if (choice == 4 && square[4] == '4')
-
-            square[4] = mark;
-        else if (choice == 5 && square[5] == '5')
-
-            square[5] = mark;
-        else if (choice == 6 && square[6] == '6')
-
-            square[6] = mark;
-        else if (choice == 7 && square[7] == '7')
-
-            square[7] = mark;
-        else if (choice == 8 && square[8] == '8')
-
-            square[8] = mark;
-        else if (choice == 9 && square[9] == '9')
-
-            square[9] = mark;
-        else
-        {
-            cout << "Invalid move ";
-
-            player--;
-            cin.ignore();
-            cin.get();
-        }
         i = checkwin();
         player++;
     } while (i == -1);
@@ -192,6 +126,47 @@ void gamePlay()
 
     cin.ignore();
     cin.get();
+}
+
+void GamePlay(char mark, int player, int choice)
+{
+    board();
+
+    if (choice == 1 && square[1] == '1')
+
+        square[1] = mark;
+    else if (choice == 2 && square[2] == '2')
+
+        square[2] = mark;
+    else if (choice == 3 && square[3] == '3')
+
+        square[3] = mark;
+    else if (choice == 4 && square[4] == '4')
+
+        square[4] = mark;
+    else if (choice == 5 && square[5] == '5')
+
+        square[5] = mark;
+    else if (choice == 6 && square[6] == '6')
+
+        square[6] = mark;
+    else if (choice == 7 && square[7] == '7')
+
+        square[7] = mark;
+    else if (choice == 8 && square[8] == '8')
+
+        square[8] = mark;
+    else if (choice == 9 && square[9] == '9')
+
+        square[9] = mark;
+    else
+    {
+        cout << "Invalid move ";
+
+        player--;
+        cin.ignore();
+        cin.get();
+    }
 }
 
 int checkwin()
