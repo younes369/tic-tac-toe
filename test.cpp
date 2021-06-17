@@ -107,9 +107,12 @@ int main()
 {
     cout << "\n~~~~~~Tic Tac Toe~~~~\n";
     cout << "\n\n   BOARD:\n";
-    cout << "| 1 || 2 || 3 |" << endl;
-    cout << "| 4 || 5 || 6 |" << endl;
-    cout << "| 7 || 8 || 9 |" << endl
+    cout << "| 1 || 2 || 3 | \n"
+         << endl;
+    cout << "| 4 || 5 || 6 | \n"
+         << endl;
+    cout << "| 7 || 8 || 9 | \n"
+         << endl
          << endl
          << endl;
 

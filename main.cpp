@@ -6,27 +6,61 @@
 using namespace std;
 
 char square[10] = {'o', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+int mode;
+int player1 = 0, player2 = 0;
 
 int checkwin();
-void board();
+void board(int score1, int score2);
 void multiPlayer();
 void AI();
+void MinMax(vector<int> moves, int depth, bool isMax);
 void GamePlay(char mark, int player, int choice);
 
 int main()
 {
-    int mode;
     cout << "choce a mode:\n";
     cout << "single player mode(1)\n";
     cout << "two players mode(2)\n";
     cin >> mode;
     if (mode == 2)
     {
-        multiPlayer();
+        string i = "Y";
+        while (i == "Y")
+        {
+            multiPlayer();
+            cout << "Do you want to continue playing ?(Y/N) \n";
+            cin >> i;
+            square[0] = '0';
+            square[1] = '1';
+            square[2] = '2';
+            square[3] = '3';
+            square[4] = '4';
+            square[5] = '5';
+            square[6] = '6';
+            square[7] = '7';
+            square[8] = '8';
+            square[9] = '9';
+        }
     }
     else if (mode == 1)
     {
-        AI();
+        string i = "Y";
+        while (i == "Y")
+        {
+            AI();
+            cout << "Do you want to continue playing ?(Y/N) \n";
+            cin >> i;
+            square[0] = '0';
+            square[1] = '1';
+            square[2] = '2';
+            square[3] = '3';
+            square[4] = '4';
+            square[5] = '5';
+            square[6] = '6';
+            square[7] = '7';
+            square[8] = '8';
+            square[9] = '9';
+        }
     }
     else
     {
@@ -41,12 +75,13 @@ void AI()
     vector<int> vect{1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     int player = 1, i, choice;
+    int player1 = 0, computer = 0;
 
     char mark;
 
     do
     {
-        board();
+        board(player1, computer);
         if ((player % 2) == 1)
         {
             cout << "Player please enter a number:  ";
@@ -74,11 +109,18 @@ void AI()
         player++;
 
     } while (i == -1);
-
-    board();
+    if (--player % 2 == 0)
+    {
+        ++computer;
+    }
+    else
+    {
+        ++player1;
+    }
+    board(player1, computer);
     if (i == 1)
     {
-        if (((player - 1) % 2) == 1)
+        if ((player % 2) == 1)
         {
             cout << "==>\aThe Player wins, congrats!! ";
         }
@@ -98,12 +140,11 @@ void multiPlayer()
 {
 
     int player = 1, i, choice;
-
     char mark;
-
     do
     {
-        board();
+
+        board(player1, player2);
         player = (player % 2) ? 1 : 2;
 
         cout << "Player " << player << ", enter a number:  ";
@@ -117,10 +158,19 @@ void multiPlayer()
         player++;
     } while (i == -1);
 
-    board();
+    if (--player % 2 == 0)
+    {
+        ++player2;
+    }
+    else
+    {
+        ++player1;
+    }
+
+    board(player1, player2);
     if (i == 1)
 
-        cout << "==>\aPlayer " << --player << " win ";
+        cout << "==>\aPlayer " << player << " win ";
     else
         cout << "==>\aGame draw";
 
@@ -130,7 +180,6 @@ void multiPlayer()
 
 void GamePlay(char mark, int player, int choice)
 {
-    board();
 
     if (choice == 1 && square[1] == '1')
 
@@ -167,6 +216,7 @@ void GamePlay(char mark, int player, int choice)
         cin.ignore();
         cin.get();
     }
+    int i = checkwin();
 }
 
 int checkwin()
@@ -202,7 +252,7 @@ int checkwin()
         return -1;
 }
 
-void board()
+void board(int score1, int score2)
 {
     system("cls");
     cout << "\n\n\tTic Tac Toe\n\n";
@@ -210,16 +260,26 @@ void board()
     cout << "Player 1 (X)  -  Player 2 (O)" << endl
          << endl;
     cout << endl;
+    if (mode == 2)
+    {
+        cout << "      scores:\n\n";
+        cout << "player 1:  " << score1 << "  player 2:  " << score2 << "\n\n\n";
+    }
+    else
+    {
+        cout << "      scores:\n\n";
+        cout << "player 1:  " << score1 << "  computer:  " << score2 << "\n\n\n";
+    }
 
     cout << "     |     |     " << endl;
     cout << "  " << square[1] << "  |  " << square[2] << "  |  " << square[3] << endl;
 
-    cout << "__|_|__" << endl;
+    cout << " __  |  _  |  __ " << endl;
     cout << "     |     |     " << endl;
 
     cout << "  " << square[4] << "  |  " << square[5] << "  |  " << square[6] << endl;
 
-    cout << "__|_|__" << endl;
+    cout << " __  |  _  |  __ " << endl;
     cout << "     |     |     " << endl;
 
     cout << "  " << square[7] << "  |  " << square[8] << "  |  " << square[9] << endl;
