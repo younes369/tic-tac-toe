@@ -8,12 +8,12 @@ using namespace std;
 char square[10] = {'o', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 int mode;
 int player1 = 0, player2 = 0;
+int computer = 0;
 
 int checkwin();
 void board(int score1, int score2);
 void multiPlayer();
 void AI();
-void MinMax(vector<int> moves, int depth, bool isMax);
 void GamePlay(char mark, int player, int choice);
 
 int main()
@@ -75,7 +75,6 @@ void AI()
     vector<int> vect{1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     int player = 1, i, choice;
-    int player1 = 0, computer = 0;
 
     char mark;
 
